@@ -9,17 +9,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="starships-list">Наш флот<span class="sr-only">(current)</span></a>
+        <li>
+          <span class="navbar-text">
+            ВКС России, гроза всея галактики!
+          </span>
         </li>
       </ul>
-      <div class="slogan">
-        ВКС России, гроза всея галактики!
-      </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+
+      <a class="nav-link" routerLink="starships-list">Наш флот</a>
+
+      <button class="search-btn btn btn-outline-dark my-2 my-sm-0">
+        <fa-icon [icon]="faSearch"></fa-icon>
+      </button>
     </div>
   </nav>
 </header>
