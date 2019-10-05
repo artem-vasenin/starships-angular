@@ -9,6 +9,7 @@ import { StarshipDetailsComponent } from './pages/starship-details/starship-deta
 import { StarshipsListComponent } from './pages/starships-list/starships-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,11 +23,15 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     BrowserModule,
     FontAwesomeModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'starships-list', component: StarshipsListComponent },
       { path: 'starship-detail/:id', component: StarshipDetailsComponent },
     ])
+  ],
+  exports: [
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

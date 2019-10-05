@@ -1,1 +1,112 @@
-<p>starships-list works!</p>
+<div class="row sharships">
+  <div class="card my-5 px-0 col-sm-12 col-lg-8 offset-md-2">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-title">
+        Список кораблей
+      </div>
+      <div class="header-loader">
+        <ng-template #loading>
+          <div
+            class="spinner-border"
+            style="width: 1rem; height: 1rem;"
+            role="status"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="card-body">
+      <div
+        class="list-group"
+        *ngIf="ships$; else loading"
+      >
+        <div *ngFor="let ship of ships$; let i = index">
+          <button
+            type="button"
+            class="list-group-item list-group-item-action sharships__item"
+            data-toggle="collapse"
+            attr.data-target="#ship{{i}}"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <fa-icon
+              class="sharships__item-icon"
+              [icon]="faSpaceShuttle"
+            ></fa-icon>
+            {{ship.name}}
+          </button>
+
+          <div class="collapse" id="ship{{i}}">
+            <ul class="list-group list-group-flush">
+              <li
+                *ngIf="ship.starship_class"
+                class="list-group-item bg-gray-6"
+              >
+                <fa-icon
+                  class="sharships__detail-icon"
+                  [icon]="faRocket"
+                ></fa-icon>
+                {{ship.starship_class}}
+              </li>
+              <li
+                *ngIf="+ship.cost_in_credits"
+                class="list-group-item bg-gray-6"
+              >
+                {{+ship.cost_in_credits | currency}}
+              </li>
+              <li
+                *ngIf="ship.length"
+                class="list-group-item bg-gray-6"
+              >
+                <fa-icon
+                  class="sharships__detail-icon"
+                  [icon]="faExchangeAlt"
+                ></fa-icon>
+                {{ship.length}}
+              </li>
+              <li
+                *ngIf="ship.consumables"
+                class="list-group-item bg-gray-6"
+              >
+                <fa-icon
+                  class="sharships__detail-icon"
+                  [icon]="faCalendarAlt"
+                ></fa-icon>
+                {{ship.consumables}}
+              </li>
+            </ul>
+          </div>
+
+          <div class="sharships__detail-readmore"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted sharships__pagination">
+      <div class="sharships__pagination-actions d-flex justify-content-between">
+        <button
+          [disabled]="!previous"
+          (click)="changePage(previous)"
+          type="button"
+          class="btn btn-outline-dark"
+        >
+          <fa-icon
+            class="sharships__pagination-icon"
+            [icon]="faAngleLeft"
+          ></fa-icon>
+        </button>
+        <button
+          [disabled]="!next"
+          (click)="changePage(next)"
+          type="button"
+          class="btn btn-outline-dark"
+        >
+          <fa-icon
+            class="sharships__pagination-icon"
+            [icon]="faAngleRight"
+          ></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
