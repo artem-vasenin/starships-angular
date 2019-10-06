@@ -19,7 +19,6 @@ import {IShip} from "../../models";
 export class StarshipsListComponent implements OnInit, OnDestroy {
   ships$: IShip[];
   shipDetails$: IShip;
-  shipsService: EntityCollectionService<IShip[]>;
   loading: boolean = false;
   next: string;
   previous: string;
