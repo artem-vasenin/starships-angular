@@ -1,21 +1,38 @@
-<div class="row">
-  <div class="card col-sm-12 col-lg-8 offset-lg-2 my-5 px-0">
+<div class="row starship">
+  <div class="card col-sm-12 col-lg-8 offset-lg-2 mt-5 mb-3 px-0">
     <img
       src="https://vignette.wikia.nocookie.net/starwars/images/3/30/Executor_BF2.png/revision/latest/scale-to-width-down/1000?cb=20180903230846"
       class="card-img-top"
       alt="emperor"
     >
     <div class="card-body">
-      <h3 class="headline mb-2">Мощь имперского флота несокрушима</h3>
-      <div>
-        Соединение сил привело к необходимому сочетанию воздушной и космической сферы как смежных областей,
-        для более удобного контроля за ними. Создание данных сил обусловлено ситуацией на мировой арене,
-        изменениями при перевооружении других государств, увеличением значимости космического сектора для
-        военно-экономического и социального прогресса.
+      <div class="loading text-sm-center">
+        <div
+          *ngIf="!ship$ || loading"
+          class="spinner-border text-sm-center"
+          style="width: 1.5rem; height: 1.5rem;"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
-      <div class="readmore text-lg-right text-sm-center pt-3">
-        <a class="nav-link" routerLink="starships-list">Наш флот</a>
+
+      <div
+        *ngIf="ship$ && !loading"
+        class="starship__content"
+      >
+        <h3 class="headline mb-2">{{ship$.name}}</h3>
       </div>
     </div>
   </div>
+
+  <ul
+    *ngIf="ship$ && !loading"
+    class="list-group col-sm-12 col-lg-8 offset-lg-2 px-0"
+  >
+    <li
+      *ngFor="let item of ship$; let i = index"
+      class="list-group-item"
+    >{{item}} {{i}}</li>
+  </ul>
 </div>

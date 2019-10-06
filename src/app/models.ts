@@ -18,3 +18,10 @@ export interface IShip {
   starship_class?: string;
   url?: string;
 }
+
+export interface IShipsQuery {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: IShip[];
+}

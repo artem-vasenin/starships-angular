@@ -12,6 +12,10 @@ export class ShipService {
     return this.http.get(`${environment.baseUrl}starships/`);
   }
 
+  getShipById(url): Observable<any> {
+    return this.http.get(url);
+  }
+
   changePage(url): Observable<any> {
     return this.http.get(url);
   }

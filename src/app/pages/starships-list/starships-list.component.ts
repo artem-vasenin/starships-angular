@@ -47,12 +47,6 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
       });
   }
 
-  getShipByUrl(url) {
-    const segments = url.split('/');
-    const id = Number(segments[segments.length - 2]);
-    this.router.navigate([`/starship-detail/${id}`]);
-  }
-
   ngOnInit() {
     this.sSub =  this.shipService.getAllShips()
       .subscribe(data => {
