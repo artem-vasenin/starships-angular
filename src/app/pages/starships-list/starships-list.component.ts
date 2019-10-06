@@ -19,7 +19,6 @@ import {Router} from "@angular/router";
 })
 export class StarshipsListComponent implements OnInit, OnDestroy {
   ships$: IShip[];
-  shipDetails$: IShip;
   loading: boolean = false;
   next: string;
   previous: string;
