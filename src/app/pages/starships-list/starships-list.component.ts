@@ -10,6 +10,7 @@ import {
   faAngleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import {IShip} from "../../models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-starships-list',
@@ -31,7 +32,10 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   faAngleLeft = faAngleLeft;
   faAngleRight = faAngleRight;
 
-  constructor(private shipService: ShipService) { }
+  constructor(
+    private shipService: ShipService,
+    private router: Router,
+  ) { }
 
   changePage(url) {
     this.loading = true;
@@ -42,6 +46,12 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
         this.previous = data.previous;
         this.loading = false;
       });
+  }
+
+  getShipByUrl(url) {
+    const segments = url.split('/');
+    const id = Number(segments[segments.length - 2]);
+    this.router.navigate([`/starship-detail/${id}`]);
   }
 
   ngOnInit() {
