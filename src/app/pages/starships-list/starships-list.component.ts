@@ -17,7 +17,10 @@ import {IShip} from "../../models";
   styleUrls: ['./starships-list.component.scss']
 })
 export class StarshipsListComponent implements OnInit, OnDestroy {
-  ships$: IShip;
+  ships$: IShip[];
+  shipDetails$: IShip;
+  shipsService: EntityCollectionService<IShip[]>;
+  loading: boolean = false;
   next: string;
   previous: string;
   sSub: Subscription;
@@ -32,11 +35,13 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   constructor(private shipService: ShipService) { }
 
   changePage(url) {
+    this.loading = true;
     this.pNextSub = this.shipService.changePage(url)
       .subscribe(data => {
         this.ships$ = data.results;
         this.next = data.next;
         this.previous = data.previous;
+        this.loading = false;
       });
   }
 

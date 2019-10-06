@@ -4,23 +4,17 @@
       <div class="header-title">
         Список кораблей
       </div>
-      <div class="header-loader">
-        <ng-template #loading>
-          <div
-            class="spinner-border"
-            style="width: 1rem; height: 1rem;"
-            role="status"
-          >
-            <span class="sr-only">Loading...</span>
-          </div>
-        </ng-template>
+      <div
+        *ngIf="!ships$ || loading"
+        class="spinner-border"
+        style="width: 1.5rem; height: 1.5rem;"
+        role="status"
+      >
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
     <div class="card-body">
-      <div
-        class="list-group"
-        *ngIf="ships$; else loading"
-      >
+      <div class="list-group" *ngIf="ships$">
         <div *ngFor="let ship of ships$; let i = index">
           <button
             type="button"
@@ -41,7 +35,7 @@
             <ul class="list-group list-group-flush">
               <li
                 *ngIf="ship.starship_class"
-                class="list-group-item bg-gray-6"
+                class="list-group-item bg-gray-2"
               >
                 <fa-icon
                   class="sharships__detail-icon"
@@ -51,13 +45,13 @@
               </li>
               <li
                 *ngIf="+ship.cost_in_credits"
-                class="list-group-item bg-gray-6"
+                class="list-group-item bg-gray-2"
               >
                 {{+ship.cost_in_credits | currency}}
               </li>
               <li
                 *ngIf="ship.length"
-                class="list-group-item bg-gray-6"
+                class="list-group-item bg-gray-2"
               >
                 <fa-icon
                   class="sharships__detail-icon"
@@ -67,7 +61,7 @@
               </li>
               <li
                 *ngIf="ship.consumables"
-                class="list-group-item bg-gray-6"
+                class="list-group-item bg-gray-2"
               >
                 <fa-icon
                   class="sharships__detail-icon"
@@ -75,10 +69,15 @@
                 ></fa-icon>
                 {{ship.consumables}}
               </li>
+              <li class="list-group-item text-sm-right">
+                <button
+                  type="button"
+                  class="btn btn-link"
+                  (click)="getShipByUrl(ship.url)"
+                >Подробнее</button>
+              </li>
             </ul>
           </div>
-
-          <div class="sharships__detail-readmore"></div>
         </div>
       </div>
     </div>
