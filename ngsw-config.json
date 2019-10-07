@@ -35,7 +35,7 @@
       "urls": [
         "https://swapi.co/api/**"
       ],
-      "name": "swapi",
+      "name": "baseUrl",
       "cacheConfig": {
         "maxAge": "3600",
         "maxSize": 5
