@@ -18,9 +18,15 @@
 
       <a class="nav-link" routerLink="starships-list">Наш флот</a>
 
-      <button class="search-btn btn btn-outline-dark my-2 my-sm-0">
+      <button
+        class="search-btn btn btn-outline-dark my-2 my-sm-0"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
         <fa-icon [icon]="faSearch"></fa-icon>
       </button>
     </div>
   </nav>
 </header>
+
+<app-modal></app-modal>
