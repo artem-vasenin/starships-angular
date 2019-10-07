@@ -73,7 +73,7 @@
                 <button
                   type="button"
                   class="btn btn-link"
-                  (click)="getShipByUrl(ship.url)"
+                  [routerLink]="['/starship-detail', ship.id]"
                 >Подробнее</button>
               </li>
             </ul>

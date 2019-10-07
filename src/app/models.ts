@@ -16,12 +16,10 @@ export interface IShip {
   passengers?: string;
   pilots?: []
   starship_class?: string;
-  url?: string;
+  url: string;
 }
 
-export interface IShipsQuery {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: IShip[];
+export interface IShipDetails {
+  name: string;
+  value: string;
 }

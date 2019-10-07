@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ShipService} from "../../ship.service";
-import {IShip} from "../../models";
+import {IShip, IShipDetails} from "../../models";
 import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
@@ -9,12 +9,13 @@ import {ActivatedRoute, Params} from "@angular/router";
   templateUrl: './starship-details.component.html',
   styleUrls: ['./starship-details.component.scss']
 })
+
 export class StarshipDetailsComponent implements OnInit, OnDestroy {
   private id: number;
   private routeSubscription: Subscription;
   loading: boolean = false;
   sSub: Subscription;
-  ship$: IShip;
+  ship$: IShipDetails[];
 
   constructor(
     private route: ActivatedRoute,
@@ -24,18 +25,29 @@ export class StarshipDetailsComponent implements OnInit, OnDestroy {
       .subscribe(params => this.id = params['id']);
   }
 
+  addDetailsItems(obj) {
+    let items = [];
+    for (let key in obj) {
+      let value = null;
+      if (Array.isArray(obj[key])
+        || key === 'url'
+        || key === 'films'
+        || key === 'pilots') {
+        continue;
+      } else {
+        value = obj[key];
+      }
+      items.push({name: key, value: value});
+    }
+    return items;
+  };
+
   ngOnInit() {
     this.loading = true;
-    this.sSub =  this.shipService.getShipById(
-      `https://swapi.co/api/starships/${this.id}/`
-    )
+    this.sSub =  this.shipService
+      .getShipById(`https://swapi.co/api/starships/${this.id}/`)
       .subscribe(data => {
-        for (let key in data) {
-          if (key === 'url' || key === 'films' || key === 'pilots') {
-            delete data[key];
-          }
-        }
-        this.ship$ = { ...data };
+        this.ship$ = this.addDetailsItems(data);
         this.loading = false;
       });
   }

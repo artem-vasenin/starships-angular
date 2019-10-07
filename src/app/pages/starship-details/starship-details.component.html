@@ -28,11 +28,18 @@
 
   <ul
     *ngIf="ship$ && !loading"
-    class="list-group col-sm-12 col-lg-8 offset-lg-2 px-0"
+    class="list-group col-sm-12 col-lg-8 offset-lg-2 px-0 mb-5"
   >
     <li
-      *ngFor="let item of ship$; let i = index"
+      *ngFor="let item of ship$"
       class="list-group-item"
-    >{{item}} {{i}}</li>
+    >
+      <div
+        class="starship__detail-wrap d-flex justify-content-between"
+      >
+        <div class="starship__detail-name">{{item.name}}:</div>
+        <div class="starship__detail-value">{{item.value}}</div>
+      </div>
+    </li>
   </ul>
 </div>
