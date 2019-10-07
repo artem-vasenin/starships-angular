@@ -66,9 +66,9 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   }
 
   searchShips(search) {
+    this.loading = true;
     this.sSub =  this.shipService.getAllShips(search)
       .subscribe(data => {
-
         this.ships$ = data.results.map(item => {
           return {
             ...item,
@@ -77,6 +77,7 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
         });
         this.next = data.next;
         this.previous = data.previous;
+        this.loading = false;
       });
   }
 
