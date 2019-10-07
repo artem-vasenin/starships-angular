@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ModalComponent } from './components/modal/modal.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { ModalComponent } from './components/modal/modal.component';
     BrowserModule,
     FontAwesomeModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'starships-list', component: StarshipsListComponent },
+      { path: 'starships-list/:search', component: StarshipsListComponent },
       { path: 'starship-detail/:id', component: StarshipDetailsComponent },
     ])
   ],

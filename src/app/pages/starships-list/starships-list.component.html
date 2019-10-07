@@ -5,7 +5,7 @@
         Список кораблей
       </div>
       <div
-        *ngIf="!ships$ || loading"
+        *ngIf="loading"
         class="spinner-border"
         style="width: 1.5rem; height: 1.5rem;"
         role="status"
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="list-group" *ngIf="ships$">
+      <div class="list-group" *ngIf="ships$ && ships$.length; else empty">
         <div *ngFor="let ship of ships$; let i = index">
           <button
             type="button"
@@ -80,6 +80,10 @@
           </div>
         </div>
       </div>
+
+      <ng-template #empty>
+        Список кораблей пуст
+      </ng-template>
     </div>
     <div class="card-footer text-muted sharships__pagination">
       <div class="sharships__pagination-actions d-flex justify-content-between">

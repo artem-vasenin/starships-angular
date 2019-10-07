@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ShipService} from "../../ship.service";
 import {Subscription} from "rxjs";
 import {
@@ -10,6 +10,7 @@ import {
   faAngleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import {IShip} from "../../models";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-starships-list',
@@ -17,6 +18,8 @@ import {IShip} from "../../models";
   styleUrls: ['./starships-list.component.scss']
 })
 export class StarshipsListComponent implements OnInit, OnDestroy {
+  search: string;
+  private routeSubscription: Subscription;
   ships$: IShip[];
   loading: boolean = false;
   next: string;
@@ -30,7 +33,16 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
   faAngleLeft = faAngleLeft;
   faAngleRight = faAngleRight;
 
-  constructor(private shipService: ShipService) { }
+  constructor(
+    private shipService: ShipService,
+    private route: ActivatedRoute,
+  ) {
+    this.routeSubscription = this.route.paramMap
+      .subscribe(params => {
+        this.search = params.get('search');
+        this.searchShips(this.search);
+      });
+  }
 
   static getShipId(url) {
     const segments = url.split('/');
@@ -53,8 +65,8 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit() {
-    this.sSub =  this.shipService.getAllShips()
+  searchShips(search) {
+    this.sSub =  this.shipService.getAllShips(search)
       .subscribe(data => {
 
         this.ships$ = data.results.map(item => {
@@ -66,6 +78,10 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
         this.next = data.next;
         this.previous = data.previous;
       });
+  }
+
+  ngOnInit() {
+    this.searchShips('null');
   }
 
   ngOnDestroy(): void {

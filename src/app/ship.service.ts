@@ -8,8 +8,11 @@ export class ShipService {
 
   constructor(private http: HttpClient) { }
 
-  getAllShips(): Observable<any> {
-    return this.http.get(`${environment.baseUrl}starships/`);
+  getAllShips(search): Observable<any> {
+    const url = search !== 'null'
+      ? `${environment.baseUrl}starships/?search=${search}`
+      : `${environment.baseUrl}starships/`;
+    return this.http.get(url);
   }
 
   getShipById(url): Observable<any> {
