@@ -24,7 +24,7 @@ export class StarshipDetailsComponent implements OnInit, OnDestroy {
     this.routeSubscription = route.params
       .subscribe(params => this.id = params['id']);
   }
-
+  /** Добавление деталей корабля в массив */
   addDetailsItems(obj) {
     let items = [];
     for (let key in obj) {

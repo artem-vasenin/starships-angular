@@ -44,11 +44,13 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** Получение ID корабля из url */
   static getShipId(url) {
     const segments = url.split('/');
     return Number(segments[segments.length - 2]);
   }
 
+  /** Смена страницы пагинации */
   changePage(url) {
     this.loading = true;
     this.pNextSub = this.shipService.changePage(url)
@@ -65,6 +67,7 @@ export class StarshipsListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** Получение всего списка или выборки по названию */
   searchShips(search) {
     this.loading = true;
     this.sSub =  this.shipService.getAllShips(search)

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,7 +9,6 @@ import {Router} from "@angular/router";
 })
 export class ModalComponent implements OnInit {
   faSearch = faSearch;
-  form: FormGroup;
   search = '';
 
   constructor(private route: Router) { }
@@ -20,10 +18,5 @@ export class ModalComponent implements OnInit {
     this.search = '';
   }
 
-  ngOnInit() {
-    this.form = new FormGroup({
-      search: new FormControl(null, Validators.required)
-    })
-  }
-
+  ngOnInit() { }
 }

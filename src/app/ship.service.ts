@@ -8,6 +8,7 @@ export class ShipService {
 
   constructor(private http: HttpClient) { }
 
+  /** Получение полного списка кораблей или выборки по названию */
   getAllShips(search): Observable<any> {
     const url = search !== 'null'
       ? `${environment.baseUrl}starships/?search=${search}`
@@ -15,10 +16,12 @@ export class ShipService {
     return this.http.get(url);
   }
 
+  /** Получение детальной информации по кораблю */
   getShipById(url): Observable<any> {
     return this.http.get(url);
   }
 
+  /** Изменение страницы пагинации */
   changePage(url): Observable<any> {
     return this.http.get(url);
   }

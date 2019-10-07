@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from "@angular/router";
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
@@ -11,7 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ModalComponent } from './components/modal/modal.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,12 @@ import {ReactiveFormsModule} from "@angular/forms";
     BrowserModule,
     FontAwesomeModule,
     HttpClientModule,
-    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'starships-list/:search', component: StarshipsListComponent },
       { path: 'starship-detail/:id', component: StarshipDetailsComponent },
-    ])
+    ]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [
     HttpClientModule,
