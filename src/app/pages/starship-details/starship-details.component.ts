@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {ShipService} from "../../ship.service";
-import {IShip, IShipDetails} from "../../models";
-import {ActivatedRoute, Params} from "@angular/router";
+import {Subscription} from 'rxjs';
+import {ShipService} from '../../ship.service';
+import {IShip, IShipDetails} from '../../models';
+import {ActivatedRoute, Params} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-starship-details',
@@ -45,7 +46,7 @@ export class StarshipDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = true;
     this.sSub =  this.shipService
-      .getShipById(`https://swapi.co/api/starships/${this.id}/`)
+      .getShipById(`${environment.baseUrl}starships/${this.id}/`)
       .subscribe(data => {
         this.ship$ = this.addDetailsItems(data);
         this.loading = false;
